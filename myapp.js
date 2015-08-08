@@ -1,6 +1,8 @@
 Todos = new Mongo.Collection('todos');
 
 if (Meteor.isClient) {
+    Meteor.subscribe('todos');
+
     // Template Helpers
     Template.main.helpers({
         todos: function() {
@@ -34,6 +36,13 @@ if (Meteor.isClient) {
         passwordSignupFields: "USERNAME_ONLY"
     });
 }
+
+if(Meteor.isServer){
+    Meteor.publish('todos', function(){
+        return Todos.find();
+    });
+}
+
 
 // Meteor Methods
 Meteor.methods({
