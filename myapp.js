@@ -45,7 +45,7 @@ Meteor.methods({
             text: text,
             createdAt: new Date(),
             userId: Meteor.userId(),
-            username: Meteor.userr().username()
+            username: Meteor.user().username
         });
     },
     deleteTodo: function(todoId){
