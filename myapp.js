@@ -39,3 +39,25 @@ if (Meteor.isClient) {
         passwordSignupFields: "USERNAME_ONLY"
     });
 }
+
+// Meteor Methods
+Meteor.methods({
+    addTodo: function(text){
+        if(!Meteor.userId()){
+            throw new Meteor.Error('not-suthorized');
+        }
+        Todos.insert({
+            text: text,
+            createdAt: new Date(),
+            userId: Meteor.userId(),
+            username: Meteor.userr().username()
+        });
+    },
+    deleteTodo: function(todoId){
+        Todos.remove(todoId);
+    },
+    setChecked: function(todoId, setChecked){
+        Todos.update(todoId, {$set:{checked: setChecked}});
+    }
+
+});
